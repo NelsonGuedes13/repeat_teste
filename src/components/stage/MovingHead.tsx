@@ -21,6 +21,7 @@ export default function MovingHead({ position, color, onAt, phase }: Props) {
   const head = useRef<THREE.Group>(null);
   const light = useRef<THREE.SpotLight>(null);
   const lens = useRef<THREE.MeshStandardMaterial>(null);
+  const cone = useRef<THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial>>(null);
   const beam = useBeam(color);
 
   useFrame(({ clock, pointer }) => {
@@ -39,7 +40,7 @@ export default function MovingHead({ position, color, onAt, phase }: Props) {
       light.current.target.updateMatrixWorld();
       light.current.intensity = on * 60;
     }
-    beam.material.uniforms.uOpacity.value = on * 0.55;
+    if (cone.current) cone.current.material.uniforms.uOpacity.value = on * 0.55;
     if (lens.current) lens.current.emissiveIntensity = on * 6;
   });
 
@@ -59,7 +60,7 @@ export default function MovingHead({ position, color, onAt, phase }: Props) {
           <circleGeometry args={[0.13, 16]} />
           <meshStandardMaterial ref={lens} color="#000" emissive={color} emissiveIntensity={0} />
         </mesh>
-        <mesh geometry={beam.geometry} material={beam.material} position={[0, 0, 0.22]} />
+        <mesh ref={cone} geometry={beam.geometry} material={beam.material} position={[0, 0, 0.22]} />
       </group>
       <spotLight ref={light} color={color} angle={0.28} penumbra={0.6} distance={14} decay={1.4} intensity={0} />
     </group>

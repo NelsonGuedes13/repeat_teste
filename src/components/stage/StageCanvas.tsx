@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import StageScene from "./StageScene";
 
 export default function StageCanvas() {
-  const [lowPower, setLowPower] = useState(false);
-  useEffect(() => setLowPower(window.matchMedia("(max-width: 767px)").matches), []);
+  // the canvas only draws on the client, so reading the viewport here can't cause a hydration mismatch
+  const [lowPower] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches);
 
   return (
     <div className="fixed inset-0 -z-10" aria-hidden>
