@@ -10,8 +10,10 @@ export const scroll = {
 
 export type Section = keyof typeof scroll;
 
-/** What the configurator asks the stage to show. */
-export const rig = { heads: 4 };
+/** What the configurator / budget asks the stage to show (whichever section is on screen writes it). */
+export const rig = { heads: 4, sound: 2, truss: 0, led: 0, fx: 0, dj: 0 };
+/** `rig` eased over time — what the 3D actually draws. */
+export const rigLevel = { sound: 0, truss: 0, led: 0, fx: 0, dj: 0 };
 
 export const prefersReducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

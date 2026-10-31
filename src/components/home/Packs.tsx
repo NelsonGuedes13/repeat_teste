@@ -5,8 +5,8 @@ import { motion, useSpring, useTransform } from "motion/react";
 import type { Dictionary } from "@/i18n/pt";
 import type { Locale } from "@/i18n/config";
 import { useSectionProgress } from "@/components/useSectionProgress";
-import { rig } from "@/lib/scroll";
-import { PACKS, EXTRAS, MAX_DAYS, emptyExtras, estimate, headsFor, type Config, type PackId, type ExtraId } from "@/lib/packs";
+import { useDriveRig } from "@/components/useDriveRig";
+import { PACKS, EXTRAS, MAX_DAYS, emptyExtras, estimate, rigFor, type Config, type PackId, type ExtraId } from "@/lib/packs";
 
 /** Read by the contact form (phase 6) to pre-fill the request. */
 export const QUOTE_KEY = "repeat:quote";
@@ -42,17 +42,15 @@ export default function Packs({ t, lang }: { t: Dictionary["packs"]; lang: Local
   const spring = useSpring(total, { stiffness: 120, damping: 20 });
   const shown = useTransform(spring, (v) => money.format(Math.round(v)));
 
-  useEffect(() => {
-    spring.set(total);
-    rig.heads = headsFor(config);
-  }, [total, config, spring]);
+  useEffect(() => spring.set(total), [total, spring]);
+  useDriveRig(ref, useMemo(() => rigFor(config), [config]));
 
   const setExtra = (id: ExtraId, v: number) =>
     setConfig((c) => ({ ...c, extras: { ...c.extras, [id]: v } }));
 
   const request = () => {
     try {
-      sessionStorage.setItem(QUOTE_KEY, JSON.stringify({ ...config, estimate: total }));
+      sessionStorage.setItem(QUOTE_KEY, JSON.stringify({ mode: "pack", ...config, estimate: total }));
     } catch {
       // storage blocked (private mode): the form just starts empty
     }

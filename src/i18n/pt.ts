@@ -82,7 +82,21 @@ const pt = {
     add: "Adicionar",
     remove: "Remover",
   },
-  next: "A seguir: tens um orçamento definido? Monta o teu palco.",
+  budget: {
+    kicker: "Orçamento à medida",
+    title: "Tens um valor em mente? Monta o teu palco.",
+    lead: "Diz-nos quanto queres investir, que evento é e para quantas pessoas. Mostramos já o que cabe — e o palco monta-se à tua frente.",
+    amount: "Orçamento disponível",
+    type: "Tipo de evento",
+    types: { concert: "Concerto", conference: "Congresso", festival: "Festival", private: "Privado", corporate: "Corporativo" },
+    people: "Número de pessoas",
+    fits: "Com este valor montamos",
+    left: "Margem que sobra",
+    below: "Abaixo do nosso pack mais pequeno. Fala connosco na mesma — às vezes há solução.",
+    short: "Para {people} pessoas recomendamos o pack {pack} — faltam cerca de {amount}.",
+    cta: "Pedir orçamento com este valor",
+  },
+  next: "A seguir: o pedido de orçamento.",
 };
 
 export default pt;

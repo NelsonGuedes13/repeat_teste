@@ -5,6 +5,7 @@ import MovingHead from "./MovingHead";
 import Warehouse, { WAREHOUSE_Z } from "./Warehouse";
 import CameraRig from "./CameraRig";
 import PortugalMap from "./PortugalMap";
+import StageRig from "./StageRig";
 
 const COLORS = ["#ff2e88", "#2ee6ff", "#ffb02e"];
 const HEADS = Array.from({ length: 6 }, (_, i) => ({
@@ -37,6 +38,8 @@ export default function StageScene({ lowPower }: { lowPower: boolean }) {
       {HEADS.map((h) => (
         <MovingHead key={h.x} position={[h.x, 5.3, -1]} color={h.color} onAt={h.onAt} rank={h.rank} phase={h.phase} />
       ))}
+
+      <StageRig />
 
       {/* stage riser */}
       <mesh position={[0, 0.25, -1.5]}>

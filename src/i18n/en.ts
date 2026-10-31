@@ -83,7 +83,21 @@ const en: Dictionary = {
     add: "Add",
     remove: "Remove",
   },
-  next: "Next: got a set budget? Build your stage.",
+  budget: {
+    kicker: "Budget-first",
+    title: "Got a figure in mind? Build your stage.",
+    lead: "Tell us how much you want to invest, what the event is and how many guests. We'll show what fits — and the stage builds itself in front of you.",
+    amount: "Available budget",
+    type: "Event type",
+    types: { concert: "Concert", conference: "Conference", festival: "Festival", private: "Private", corporate: "Corporate" },
+    people: "Number of guests",
+    fits: "With this budget we build",
+    left: "Margin left",
+    below: "Below our smallest pack. Talk to us anyway — sometimes there's a way.",
+    short: "For {people} guests we recommend the {pack} pack — about {amount} short.",
+    cta: "Request a quote with this budget",
+  },
+  next: "Next: the quote request.",
 };
 
 export default en;

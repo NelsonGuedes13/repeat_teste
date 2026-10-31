@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useBeam } from "./Beam";
-import { scroll, rig } from "@/lib/scroll";
+import { scroll, rig, rigLevel } from "@/lib/scroll";
 
 type Props = {
   position: [number, number, number];
@@ -47,7 +47,8 @@ export default function MovingHead({ position, color, onAt, rank, phase }: Props
       light.current.target.updateMatrixWorld();
       light.current.intensity = on * 60;
     }
-    if (cone.current) cone.current.material.uniforms.uOpacity.value = on * 0.55;
+    // haze makes the beams read thicker
+    if (cone.current) cone.current.material.uniforms.uOpacity.value = on * (0.55 + rigLevel.fx * 0.3);
     if (lens.current) lens.current.emissiveIntensity = on * 6;
   });
 
