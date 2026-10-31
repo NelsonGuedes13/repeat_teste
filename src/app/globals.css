@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --stage: #050507;
+  --ink: #f2efe9;
+  --mute: #8a8794;
+  --beam-magenta: #ff2e88;
+  --beam-cyan: #2ee6ff;
+  --beam-amber: #ffb02e;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-stage: var(--stage);
+  --color-ink: var(--ink);
+  --color-mute: var(--mute);
+  --color-magenta: var(--beam-magenta);
+  --color-cyan: var(--beam-cyan);
+  --color-amber: var(--beam-amber);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--stage);
+  color: var(--ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+::selection {
+  background: var(--beam-magenta);
+  color: var(--stage);
 }
