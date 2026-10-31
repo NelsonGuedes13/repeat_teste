@@ -7,6 +7,7 @@ import Hero from "@/components/home/Hero";
 import LightsCue from "@/components/home/LightsCue";
 import WarehouseStory from "@/components/home/WarehouseStory";
 import TripStory from "@/components/home/TripStory";
+import Packs from "@/components/home/Packs";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -31,8 +32,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <LightsCue t={dict.lights} />
       <WarehouseStory t={dict.warehouse} />
       <TripStory t={dict.trip} />
+      <Packs t={dict.packs} lang={lang} />
 
-      <section className="flex min-h-svh items-center justify-center px-4">
+      {/* placeholder until the budget slider (phase 5) and the request form (phase 6) land */}
+      <section id="pedido" className="flex min-h-svh items-center justify-center px-4">
         <p className="text-xs uppercase tracking-[0.35em] text-mute">{dict.next}</p>
       </section>
     </main>

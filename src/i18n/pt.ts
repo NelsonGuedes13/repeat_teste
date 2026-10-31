@@ -44,7 +44,45 @@ const pt = {
     ],
     outro: "Do Minho ao Algarve — levamos o espetáculo onde ele for preciso.",
   },
-  next: "A seguir: escolhe o teu pack",
+  packs: {
+    kicker: "Packs de serviço",
+    title: "Escolhe o teu palco.",
+    lead: "Três pontos de partida, pensados para os eventos que mais fazemos. Ajusta os extras e vê a estimativa mudar — e o palco acender — em tempo real.",
+    from: "desde",
+    popular: "Mais pedido",
+    items: {
+      essencial: {
+        name: "Essencial",
+        capacity: "Até 150 pessoas",
+        features: ["Som para voz e música ambiente", "2 moving heads + luz de ambiente", "1 técnico durante o evento", "Montagem e desmontagem"],
+      },
+      pro: {
+        name: "Pro",
+        capacity: "Até 800 pessoas",
+        features: ["Line array e monição", "4 moving heads + wash", "Palco 6 × 4 m", "Régie e 2 técnicos"],
+      },
+      espetaculo: {
+        name: "Espetáculo",
+        capacity: "Até 5 000 pessoas",
+        features: ["Line array de grande formato", "6 moving heads, feixes e LED", "Palco 10 × 6 m com truss", "Equipa técnica completa e direção técnica"],
+      },
+    },
+    extrasTitle: "Extras",
+    extras: {
+      led: { name: "Ecrã LED 3 × 2 m", unit: "" },
+      heads: { name: "Moving heads extra", unit: "/ un." },
+      dj: { name: "Cabine de DJ", unit: "" },
+      fx: { name: "Fumo e CO₂", unit: "" },
+      tech: { name: "Técnico extra", unit: "/ dia" },
+    },
+    days: "Dias de evento",
+    estimate: "Estimativa",
+    note: "Valor indicativo, sem IVA. O orçamento final é feito à medida do teu evento.",
+    cta: "Pedir orçamento com esta configuração",
+    add: "Adicionar",
+    remove: "Remover",
+  },
+  next: "A seguir: tens um orçamento definido? Monta o teu palco.",
 };
 
 export default pt;

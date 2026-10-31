@@ -4,9 +4,14 @@ export const scroll = {
   lights: 0,
   load: 0,
   trip: 0,
+  /** 0 → 1 while the packs section scrolls into view (camera returns to the stage) */
+  packs: 0,
 };
 
 export type Section = keyof typeof scroll;
+
+/** What the configurator asks the stage to show. */
+export const rig = { heads: 4 };
 
 export const prefersReducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

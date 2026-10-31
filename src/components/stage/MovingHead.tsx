@@ -4,21 +4,24 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useBeam } from "./Beam";
-import { scroll } from "@/lib/scroll";
+import { scroll, rig } from "@/lib/scroll";
 
 type Props = {
   position: [number, number, number];
   color: string;
   /** scroll progress at which this fixture switches on */
   onAt: number;
+  /** switch-on order (0 = first) when the configurator picks how many fixtures run */
+  rank: number;
   phase: number;
 };
 
 const ease = (t: number) => t * t * (3 - 2 * t);
 const target = new THREE.Vector3();
 
-export default function MovingHead({ position, color, onAt, phase }: Props) {
+export default function MovingHead({ position, color, onAt, rank, phase }: Props) {
   const head = useRef<THREE.Group>(null);
+  const level = useRef(0);
   const light = useRef<THREE.SpotLight>(null);
   const lens = useRef<THREE.MeshStandardMaterial>(null);
   const cone = useRef<THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial>>(null);
@@ -26,7 +29,11 @@ export default function MovingHead({ position, color, onAt, phase }: Props) {
 
   useFrame(({ clock, pointer }) => {
     const t = clock.elapsedTime;
-    const on = ease(THREE.MathUtils.clamp((scroll.lights - onAt) / 0.1, 0, 1));
+    const cue = ease(THREE.MathUtils.clamp((scroll.lights - onAt) / 0.1, 0, 1));
+    // back at the stage for the packs: the configurator decides how many fixtures run
+    const want = rank < rig.heads ? 1 : 0;
+    level.current += (want - level.current) * 0.08;
+    const on = scroll.packs > 0 ? level.current : cue;
 
     // slow sweep + a pull toward the pointer so the rig feels alive
     target.set(

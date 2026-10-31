@@ -12,6 +12,7 @@ const HEADS = Array.from({ length: 6 }, (_, i) => ({
   color: COLORS[i % 3],
   // one fixture already on for the welcome, then centre-out — reads like a lighting cue
   onAt: i === 2 ? -1 : 0.1 + [2, 1, 0, 0, 1, 2][i] * 0.18,
+  rank: [4, 2, 0, 1, 3, 5][i], // centre pair first, then outward
   phase: i * 1.1,
 }));
 
@@ -34,7 +35,7 @@ export default function StageScene({ lowPower }: { lowPower: boolean }) {
       </mesh>
 
       {HEADS.map((h) => (
-        <MovingHead key={h.x} position={[h.x, 5.3, -1]} color={h.color} onAt={h.onAt} phase={h.phase} />
+        <MovingHead key={h.x} position={[h.x, 5.3, -1]} color={h.color} onAt={h.onAt} rank={h.rank} phase={h.phase} />
       ))}
 
       {/* stage riser */}

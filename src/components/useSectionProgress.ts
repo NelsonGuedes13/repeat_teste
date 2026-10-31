@@ -1,13 +1,19 @@
 "use client";
 
 import { useRef } from "react";
-import { useMotionValueEvent, useScroll } from "motion/react";
+import { useMotionValueEvent, useScroll, type UseScrollOptions } from "motion/react";
 import { scroll, type Section } from "@/lib/scroll";
 
-/** Progress of a sticky section (top hits viewport top → bottom hits viewport bottom), mirrored into the 3D scroll store. */
-export function useSectionProgress(section: Section) {
+/**
+ * Progress of a section, mirrored into the 3D scroll store.
+ * Default range suits sticky sections: top hits viewport top → bottom hits viewport bottom.
+ */
+export function useSectionProgress(
+  section: Section,
+  offset: UseScrollOptions["offset"] = ["start start", "end end"],
+) {
   const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const { scrollYProgress } = useScroll({ target: ref, offset });
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     scroll[section] = v;
   });

@@ -24,6 +24,9 @@ const KEYS: Key[] = [
   { at: 2.11, pos: [26, 4.5, W + 11], look: [40, 1.5, W] },
 ];
 
+const STAGE_POS = new THREE.Vector3(0, 2.6, 9);
+const STAGE_LOOK = new THREE.Vector3(0, 2.4, -1);
+
 const pos = new THREE.Vector3();
 const look = new THREE.Vector3();
 const a = new THREE.Vector3();
@@ -53,10 +56,16 @@ export default function CameraRig() {
     sample(scroll.trip > 0 ? 2 + scroll.trip : scroll.load > 0 ? 1 + scroll.load : scroll.lights);
 
     // the map is seen from high up: hand over to the trip camera and push the fog back
-    const onMap = smooth(range(scroll.trip, TRIP.toMap[0], TRIP.toMap[1]));
+    const back = smooth(scroll.packs);
+    const onMap = smooth(range(scroll.trip, TRIP.toMap[0], TRIP.toMap[1])) * (1 - back);
     if (onMap > 0) {
       pos.lerp(tripCam.pos, onMap);
       look.lerp(tripCam.look, onMap);
+    }
+    // packs: back to the stage from the start — "this is your event"
+    if (back > 0) {
+      pos.lerp(STAGE_POS, back);
+      look.lerp(STAGE_LOOK, back);
     }
     const fog = scene.fog as THREE.Fog;
     fog.far = 34 + onMap * 70;

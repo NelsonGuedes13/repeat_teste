@@ -45,7 +45,45 @@ const en: Dictionary = {
     ],
     outro: "From the Minho to the Algarve — we take the show wherever it's needed.",
   },
-  next: "Next: pick your pack",
+  packs: {
+    kicker: "Service packs",
+    title: "Pick your stage.",
+    lead: "Three starting points, built around the events we do most. Adjust the extras and watch the estimate change — and the stage light up — in real time.",
+    from: "from",
+    popular: "Most booked",
+    items: {
+      essencial: {
+        name: "Essential",
+        capacity: "Up to 150 guests",
+        features: ["Sound for speech and background music", "2 moving heads + ambient lighting", "1 technician during the event", "Set-up and take-down"],
+      },
+      pro: {
+        name: "Pro",
+        capacity: "Up to 800 guests",
+        features: ["Line array and monitoring", "4 moving heads + wash", "6 × 4 m stage", "FOH and 2 technicians"],
+      },
+      espetaculo: {
+        name: "Show",
+        capacity: "Up to 5,000 guests",
+        features: ["Large-format line array", "6 moving heads, beams and LED", "10 × 6 m stage with truss", "Full crew and technical direction"],
+      },
+    },
+    extrasTitle: "Extras",
+    extras: {
+      led: { name: "LED screen 3 × 2 m", unit: "" },
+      heads: { name: "Extra moving heads", unit: "/ unit" },
+      dj: { name: "DJ booth", unit: "" },
+      fx: { name: "Haze and CO₂", unit: "" },
+      tech: { name: "Extra technician", unit: "/ day" },
+    },
+    days: "Event days",
+    estimate: "Estimate",
+    note: "Indicative price, VAT excluded. The final quote is tailored to your event.",
+    cta: "Request a quote with this setup",
+    add: "Add",
+    remove: "Remove",
+  },
+  next: "Next: got a set budget? Build your stage.",
 };
 
 export default en;
