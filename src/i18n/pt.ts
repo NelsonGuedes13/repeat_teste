@@ -15,7 +15,21 @@ const pt = {
     lines: ["Luz.", "Som.", "Palco.", "Espetáculo."],
     caption: "Tudo sai do mesmo armazém. Tudo chega pronto a ligar.",
   },
-  next: "A seguir: o armazém",
+  warehouse: {
+    kicker: "O armazém",
+    title: "Tudo começa aqui.",
+    lead: "Cada evento sai do nosso armazém já testado, etiquetado e pronto a montar. Desliza para carregar o camião.",
+    items: [
+      { title: "Palcos", text: "Estrados modulares, escadas e saias de palco — do púlpito de um congresso ao palco principal de um festival." },
+      { title: "Estruturas", text: "Truss, torres e pórticos certificados para suspender luz, som e cenografia em segurança." },
+      { title: "Iluminação", text: "Moving heads, wash, perfis e LED. Desenho de luz pensado para o espaço e para o momento." },
+      { title: "Som", text: "Line arrays, monição e microfonia — de salas para 50 pessoas a praças com milhares." },
+      { title: "Régie e equalização", text: "Mesa, técnicos e medição acústica: equalizamos o ambiente para que cada lugar oiça bem." },
+      { title: "Espetáculo", text: "Fumo, CO₂, chuva de papel e direção técnica para transformar um evento num momento." },
+    ],
+    outro: "Carga completa. Vamos para a estrada.",
+  },
+  next: "A seguir: a estrada",
 };
 
 export default pt;

@@ -1,36 +1,26 @@
 "use client";
 
-import { useFrame } from "@react-three/fiber";
 import { MeshReflectorMaterial } from "@react-three/drei";
-import * as THREE from "three";
 import MovingHead from "./MovingHead";
-import { scroll } from "@/lib/scroll";
+import Warehouse, { WAREHOUSE_Z } from "./Warehouse";
+import CameraRig from "./CameraRig";
 
 const COLORS = ["#ff2e88", "#2ee6ff", "#ffb02e"];
 const HEADS = Array.from({ length: 6 }, (_, i) => ({
   x: -3.75 + i * 1.5,
   color: COLORS[i % 3],
   // one fixture already on for the welcome, then centre-out — reads like a lighting cue
-  onAt: i === 2 ? -1 : 0.04 + [2, 1, 0, 0, 1, 2][i] * 0.07,
+  onAt: i === 2 ? -1 : 0.1 + [2, 1, 0, 0, 1, 2][i] * 0.18,
   phase: i * 1.1,
 }));
 
-const camTarget = new THREE.Vector3();
-
 export default function StageScene({ lowPower }: { lowPower: boolean }) {
-  useFrame(({ camera, pointer }, delta) => {
-    const p = scroll.progress;
-    // dolly in toward the stage as the cue builds
-    camTarget.set(pointer.x * 0.4, 1.5 + p * 0.6 + pointer.y * 0.2, 10 - p * 3.5);
-    camera.position.lerp(camTarget, 1 - Math.exp(-delta * 3));
-    camera.lookAt(0, 2 - p * 0.4, -1);
-  });
-
   return (
     <>
       <color attach="background" args={["#050507"]} />
-      <fog attach="fog" args={["#050507", 7, 24]} />
+      <fog attach="fog" args={["#050507", 9, 34]} />
       <ambientLight intensity={0.05} />
+      <CameraRig />
 
       {/* truss */}
       <mesh position={[0, 5.6, -1]}>
@@ -58,8 +48,10 @@ export default function StageScene({ lowPower }: { lowPower: boolean }) {
         <meshStandardMaterial color="#08080b" roughness={1} />
       </mesh>
 
-      <mesh rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[40, 40]} />
+      <Warehouse lowPower={lowPower} />
+
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, WAREHOUSE_Z / 2]}>
+        <planeGeometry args={[80, 110]} />
         <MeshReflectorMaterial
           resolution={lowPower ? 256 : 512}
           blur={[300, 80]}

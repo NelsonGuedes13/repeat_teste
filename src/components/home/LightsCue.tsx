@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { motion, useTransform, type MotionValue } from "motion/react";
 import type { Dictionary } from "@/i18n/pt";
+import { useSectionProgress } from "@/components/useSectionProgress";
 
 const COLORS = ["text-magenta", "text-cyan", "text-amber", "text-ink"];
 
@@ -19,8 +19,7 @@ function Line({ text, i, n, progress }: { text: string; i: number; n: number; pr
 
 /** Sticky sequence: each word "switches on" as the rig behind it lights up. */
 export default function LightsCue({ t }: { t: Dictionary["lights"] }) {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const { ref, progress: scrollYProgress } = useSectionProgress("lights");
   const caption = useTransform(scrollYProgress, [0.78, 0.9], [0, 1]);
 
   return (

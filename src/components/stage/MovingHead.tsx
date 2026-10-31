@@ -26,7 +26,7 @@ export default function MovingHead({ position, color, onAt, phase }: Props) {
 
   useFrame(({ clock, pointer }) => {
     const t = clock.elapsedTime;
-    const on = ease(THREE.MathUtils.clamp((scroll.progress - onAt) / 0.06, 0, 1));
+    const on = ease(THREE.MathUtils.clamp((scroll.lights - onAt) / 0.1, 0, 1));
 
     // slow sweep + a pull toward the pointer so the rig feels alive
     target.set(

@@ -17,7 +17,21 @@ const en: Dictionary = {
     lines: ["Light.", "Sound.", "Stage.", "Show."],
     caption: "Everything leaves the same warehouse. Everything arrives ready to plug in.",
   },
-  next: "Next: the warehouse",
+  warehouse: {
+    kicker: "The warehouse",
+    title: "It all starts here.",
+    lead: "Every event leaves our warehouse tested, labelled and ready to build. Scroll to load the truck.",
+    items: [
+      { title: "Stages", text: "Modular decks, stairs and skirting — from a conference lectern to a festival main stage." },
+      { title: "Structures", text: "Certified truss, towers and goalposts to fly light, sound and set pieces safely." },
+      { title: "Lighting", text: "Moving heads, washes, profiles and LED. Lighting design made for the space and the moment." },
+      { title: "Sound", text: "Line arrays, monitoring and microphones — from 50-seat rooms to squares with thousands." },
+      { title: "FOH & room tuning", text: "Console, engineers and acoustic measurement: we tune the room so every seat sounds right." },
+      { title: "Show", text: "Haze, CO₂, confetti and technical direction to turn an event into a moment." },
+    ],
+    outro: "Fully loaded. Hitting the road.",
+  },
+  next: "Next: the road",
 };
 
 export default en;
