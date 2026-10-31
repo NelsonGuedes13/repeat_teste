@@ -6,6 +6,7 @@ import StageCanvas from "@/components/stage/StageCanvas";
 import Hero from "@/components/home/Hero";
 import LightsCue from "@/components/home/LightsCue";
 import WarehouseStory from "@/components/home/WarehouseStory";
+import TripStory from "@/components/home/TripStory";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -29,6 +30,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <Hero t={dict.hero} />
       <LightsCue t={dict.lights} />
       <WarehouseStory t={dict.warehouse} />
+      <TripStory t={dict.trip} />
 
       <section className="flex min-h-svh items-center justify-center px-4">
         <p className="text-xs uppercase tracking-[0.35em] text-mute">{dict.next}</p>

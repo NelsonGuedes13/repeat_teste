@@ -3,7 +3,9 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { scroll, smooth, range, LOAD } from "@/lib/scroll";
+import { scroll, smooth, range, LOAD, TRIP } from "@/lib/scroll";
+import { useBeam } from "./Beam";
+import Cargo from "./Cargo";
 
 // light paint so the truck reads as the hero object against the dark warehouse
 const PAINT = "#d4d4da";
@@ -12,6 +14,10 @@ const STEEL = "#2a2a33";
 /** Curtain-sider: the near side is open so the cargo stays visible; the curtain closes when the load is done. */
 export default function Truck() {
   const curtain = useRef<THREE.Group>(null);
+  const body = useRef<THREE.Group>(null);
+  // both headlights share one material, so one mesh ref is enough to fade them
+  const beam = useRef<THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial>>(null);
+  const headBeam = useBeam("#fff4e0", 9, 1.6);
 
   useFrame(() => {
     const c = smooth(range(scroll.load, ...LOAD.curtain));
@@ -19,10 +25,26 @@ export default function Truck() {
       curtain.current.scale.x = Math.max(c, 0.0001);
       curtain.current.visible = c > 0.001;
     }
+    // ease-in only: the truck accelerates out of the door and keeps going
+    const d = range(scroll.trip, ...TRIP.drive);
+    if (body.current) body.current.position.x = d * d * 34;
+    const lights = range(scroll.trip, 0.01, 0.04) * 0.22;
+    if (beam.current) beam.current.material.uniforms.uOpacity.value = lights;
   });
 
   return (
-    <group>
+    <group ref={body}>
+      <Cargo />
+      {[-0.85, 0.85].map((z, i) => (
+        <mesh
+          key={z}
+          ref={i === 0 ? beam : undefined}
+          geometry={headBeam.geometry}
+          material={headBeam.material}
+          position={[8.65, 1.25, z]}
+          rotation={[0, Math.PI / 2, 0]}
+        />
+      ))}
       {/* wheels */}
       {[-1.8, -0.6, 5.3, 7.7].flatMap((x) =>
         [-1.1, 1.1].map((z) => (

@@ -4,6 +4,7 @@ import { MeshReflectorMaterial } from "@react-three/drei";
 import MovingHead from "./MovingHead";
 import Warehouse, { WAREHOUSE_Z } from "./Warehouse";
 import CameraRig from "./CameraRig";
+import PortugalMap from "./PortugalMap";
 
 const COLORS = ["#ff2e88", "#2ee6ff", "#ffb02e"];
 const HEADS = Array.from({ length: 6 }, (_, i) => ({
@@ -49,6 +50,7 @@ export default function StageScene({ lowPower }: { lowPower: boolean }) {
       </mesh>
 
       <Warehouse lowPower={lowPower} />
+      <PortugalMap />
 
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, WAREHOUSE_Z / 2]}>
         <planeGeometry args={[80, 110]} />

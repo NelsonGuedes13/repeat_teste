@@ -3,6 +3,7 @@
 export const scroll = {
   lights: 0,
   load: 0,
+  trip: 0,
 };
 
 export type Section = keyof typeof scroll;
@@ -23,4 +24,15 @@ export const LOAD = {
   lightsOn: [0, 0.08] as const,
   item: (i: number) => [0.15 + i * 0.115, 0.15 + i * 0.115 + 0.09] as const,
   curtain: [0.86, 0.94] as const,
+};
+
+/** Trip timeline (fractions of the road section). */
+export const TRIP = {
+  door: [0, 0.045] as const,
+  drive: [0.04, 0.11] as const,
+  toMap: [0.1, 0.17] as const,
+  /** stop i: drive to it, then stay while its gallery shows */
+  travel: (i: number) => [0.17 + i * 0.19, 0.17 + i * 0.19 + 0.08] as const,
+  dwell: (i: number) => [0.17 + i * 0.19 + 0.08, 0.17 + (i + 1) * 0.19] as const,
+  outro: [0.93, 1] as const,
 };

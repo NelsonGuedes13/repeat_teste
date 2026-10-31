@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  images: {
+    // placeholder gallery photos (Unsplash licence) until the client sends real work
+    remotePatterns: [new URL("https://images.unsplash.com/**")],
+  },
 };
 
 export default nextConfig;

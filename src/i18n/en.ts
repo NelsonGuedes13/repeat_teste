@@ -31,7 +31,21 @@ const en: Dictionary = {
     ],
     outro: "Fully loaded. Hitting the road.",
   },
-  next: "Next: the road",
+  trip: {
+    depart: "Door open. The truck rolls out fully loaded — and the road is long.",
+    kicker: "The road",
+    title: "North to south, the whole country is our stage.",
+    enRoute: "On the way to",
+    stop: "Stop",
+    stops: [
+      { city: "Porto", type: "Open-air concert", text: "A 12-metre stage, line array and lighting design for thousands on a summer night." },
+      { city: "Coimbra", type: "Conference", text: "An auditorium with FOH, screens, panel microphones and a tuned room so every row hears clearly." },
+      { city: "Lisbon", type: "Festival", text: "Two stages, three days, one technical crew on site from the first soundcheck to the last chord." },
+      { city: "Algarve", type: "Private event", text: "A sunset wedding: ambient lighting, a DJ dance floor and discreet sound for dinner." },
+    ],
+    outro: "From the Minho to the Algarve — we take the show wherever it's needed.",
+  },
+  next: "Next: pick your pack",
 };
 
 export default en;

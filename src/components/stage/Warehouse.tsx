@@ -6,8 +6,7 @@ import { Edges } from "@react-three/drei";
 import * as THREE from "three";
 import { useBeam } from "./Beam";
 import Truck from "./Truck";
-import Cargo from "./Cargo";
-import { scroll, smooth, range, LOAD } from "@/lib/scroll";
+import { scroll, smooth, range, LOAD, TRIP } from "@/lib/scroll";
 
 /** World z of the warehouse — far enough from the stage that fog hides one from the other. */
 export const WAREHOUSE_Z = -44;
@@ -44,6 +43,18 @@ function Lamp({ position, withLight }: { position: [number, number, number]; wit
       </mesh>
       <mesh ref={cone} geometry={beam.geometry} material={beam.material} rotation={[Math.PI / 2, 0, 0]} position={[0, -0.15, 0]} />
       {withLight && <pointLight ref={light} position={[0, -0.4, 0]} color={WARM} distance={16} decay={1.5} intensity={0} />}
+    </group>
+  );
+}
+
+function RollerDoor({ children }: { children: React.ReactNode }) {
+  const door = useRef<THREE.Group>(null);
+  useFrame(() => {
+    if (door.current) door.current.position.y = 2.75 + smooth(range(scroll.trip, ...TRIP.door)) * 5.3;
+  });
+  return (
+    <group ref={door} position={[13.05, 2.75, 0]}>
+      {children}
     </group>
   );
 }
@@ -98,7 +109,7 @@ export default function Warehouse({ lowPower }: { lowPower: boolean }) {
         <boxGeometry args={[0.3, 3.5, 7]} />
         <meshStandardMaterial color={WALL} roughness={0.95} />
       </mesh>
-      <group position={[13.05, 2.75, 0]}>
+      <RollerDoor>
         <mesh>
           <boxGeometry args={[0.12, 5.5, 7]} />
           <meshStandardMaterial color="#1b1b22" metalness={0.5} roughness={0.6} />
@@ -109,7 +120,7 @@ export default function Warehouse({ lowPower }: { lowPower: boolean }) {
             <meshStandardMaterial color="#2c2c36" />
           </mesh>
         ))}
-      </group>
+      </RollerDoor>
       {/* wall ribs */}
       {Array.from({ length: 7 }, (_, i) => (
         <mesh key={i} position={[-12 + i * 4, 4.5, -9.8]}>
@@ -154,7 +165,6 @@ export default function Warehouse({ lowPower }: { lowPower: boolean }) {
       <directionalLight position={[-6, 8, 14]} intensity={0.35} color="#9fb4ff" target-position={[0, 0, WAREHOUSE_Z]} />
 
       <Truck />
-      <Cargo />
     </group>
   );
 }

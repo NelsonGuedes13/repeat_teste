@@ -29,7 +29,22 @@ const pt = {
     ],
     outro: "Carga completa. Vamos para a estrada.",
   },
-  next: "A seguir: a estrada",
+  trip: {
+    depart: "Portão aberto. O camião sai carregado — e a estrada é longa.",
+    kicker: "A estrada",
+    title: "De norte a sul, o país é o nosso palco.",
+    enRoute: "A caminho de",
+    stop: "Paragem",
+    // exemplos genéricos — substituir pelos trabalhos reais da empresa
+    stops: [
+      { city: "Porto", type: "Concerto ao ar livre", text: "Palco de 12 metros, line array e desenho de luz para milhares de pessoas numa noite de verão." },
+      { city: "Coimbra", type: "Congresso", text: "Auditório com régie, ecrãs, microfonia para painéis e som equalizado para que cada fila oiça bem." },
+      { city: "Lisboa", type: "Festival", text: "Dois palcos, três dias, uma equipa técnica no terreno do primeiro teste de som ao último acorde." },
+      { city: "Algarve", type: "Evento privado", text: "Casamento ao pôr do sol: iluminação ambiente, pista com DJ e som discreto para o jantar." },
+    ],
+    outro: "Do Minho ao Algarve — levamos o espetáculo onde ele for preciso.",
+  },
+  next: "A seguir: escolhe o teu pack",
 };
 
 export default pt;
