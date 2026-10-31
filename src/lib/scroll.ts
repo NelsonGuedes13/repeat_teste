@@ -10,6 +10,9 @@ export const scroll = {
 
 export type Section = keyof typeof scroll;
 
+/** Scroll to an element through the smooth-scroll engine (native smooth scrolling fights it). */
+export const scrollToEl = { run: (el: HTMLElement) => el.scrollIntoView({ behavior: "smooth" }) };
+
 /** What the configurator / budget asks the stage to show (whichever section is on screen writes it). */
 export const rig = { heads: 4, sound: 2, truss: 0, led: 0, fx: 0, dj: 0 };
 /** `rig` eased over time — what the 3D actually draws. */

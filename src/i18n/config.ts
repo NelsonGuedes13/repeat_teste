@@ -7,3 +7,9 @@ export const hasLocale = (value: string): value is Locale =>
 
 // Placeholder até a marca estar definida — trocar só aqui.
 export const BRAND = "Repeat";
+
+// Para onde vão os pedidos de orçamento. Email de testes até haver o da empresa; telefone ainda por definir.
+export const CONTACT = {
+  email: "nelson2000guedes@gmail.com",
+  phone: "+351 000 000 000",
+};

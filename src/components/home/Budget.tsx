@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useSpring, useTransform } from "motion/react";
 import type { Dictionary } from "@/i18n/pt";
 import type { Locale } from "@/i18n/config";
 import { useDriveRig } from "@/components/useDriveRig";
-import { QUOTE_KEY } from "@/components/home/Packs";
+import { sendToContact } from "@/lib/quote";
 import { BUDGET, EVENT_TYPES, EXTRAS, rigFor, suggest, type EventType } from "@/lib/packs";
 
 const PEOPLE = { min: 20, max: 5000, step: 10 } as const;
@@ -38,14 +38,7 @@ export default function Budget({ t, packs, lang }: { t: Dictionary["budget"]; pa
       ]
     : [];
 
-  const request = () => {
-    try {
-      sessionStorage.setItem(QUOTE_KEY, JSON.stringify({ mode: "budget", budget, type, people, ...result.config }));
-    } catch {
-      // storage blocked: the form just starts empty
-    }
-    document.getElementById("pedido")?.scrollIntoView({ behavior: "smooth" });
-  };
+  const request = () => sendToContact({ mode: "budget", budget, type, people, ...result.config });
 
   const fill = ((budget - BUDGET.min) / (BUDGET.max - BUDGET.min)) * 100;
 

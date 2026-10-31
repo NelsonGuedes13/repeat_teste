@@ -12,7 +12,7 @@ Clientes: espaços públicos, privados, congressos, festivais, eventos corporati
 | Viagem | Camião desce Portugal com paragens por tipo de evento, cada uma com mini-galeria |
 | Packs | 3 packs (Essencial / Pro / Espetáculo) com preço "desde" + configurador de extras com estimativa ao vivo |
 | Orçamento próprio | Slider de orçamento + tipo de evento + nº de pessoas; um palco 3D ganha equipamento à medida que o valor sobe |
-| Contacto | Pedido guardado em BD + email à empresa + confirmação ao cliente; painel admin para criar e enviar o orçamento final |
+| Contacto | Só email ou telefone (decisão 2026-10-31): o formulário abre a app de email do cliente com o pedido escrito, dirigido ao email da empresa. Sem base de dados, sem Resend, sem painel admin. |
 | Marca | Por definir — placeholder até lá |
 | Línguas | PT (defeito) + EN |
 
@@ -34,21 +34,22 @@ Movimento sempre narrativo — nada de efeitos decorativos soltos. Fallback leve
 
 ## Stack
 
-Next.js (App Router) + Tailwind + Motion + React Three Fiber/drei + Lenis. Supabase (pedidos + admin auth), Resend (emails), Vercel.
+Next.js (App Router) + Tailwind + Motion + React Three Fiber/drei + Lenis. Sem backend. Vercel.
 
 ## Fases
 
-1. Fundação: tokens visuais, i18n PT/EN, scroll suave, cena 3D base com luzes.
-2. Armazém + carga do camião.
-3. Mapa de Portugal + viagem + galerias (imagens genéricas).
-4. Packs + configurador.
-5. Slider de orçamento com palco 3D.
-6. Formulário + Supabase + emails.
-7. Painel admin (pedidos → orçamento final → envio).
+1. ✅ Fundação: tokens visuais, i18n PT/EN, scroll suave, cena 3D base com luzes.
+2. ✅ Armazém + carga do camião.
+3. ✅ Mapa de Portugal + viagem + galerias (imagens genéricas).
+4. ✅ Packs + configurador.
+5. ✅ Slider de orçamento com palco 3D.
+6. ✅ Contacto: formulário → email pré-preenchido (mailto) + telefone.
+7. ~~Painel admin~~ — cancelado (os orçamentos são tratados por email/telefone).
 
 ## Em aberto
 
-- Nome, logótipo e cores da marca
-- Preços "desde" de cada pack e preços dos extras
-- Fotos reais de trabalhos (até lá, genéricas)
-- Email de destino dos pedidos
+- Nome, logótipo e cores da marca (`BRAND` em `src/i18n/config.ts`)
+- Email da empresa e telefone (`CONTACT` em `src/i18n/config.ts`; hoje: email de testes + telefone falso)
+- Preços "desde" de cada pack e preços dos extras (`src/lib/packs.ts`)
+- Textos e fotos reais das paragens da viagem (`src/i18n/*.ts`, `src/lib/trip.ts`)
+- Marca fixa no topo sobrepõe-se ao conteúdo ao fazer scroll

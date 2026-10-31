@@ -1,6 +1,8 @@
 // Self-check for the estimate maths: `node --experimental-strip-types src/lib/packs.check.ts`
 import assert from "node:assert/strict";
 import { estimate, emptyExtras, headsFor, suggest } from "./packs.ts";
+import { buildRequestMail } from "./mail.ts";
+import pt from "../i18n/pt.ts";
 
 const none = emptyExtras();
 assert.equal(estimate({ pack: "essencial", extras: none, days: 1 }), 1200);
@@ -26,4 +28,18 @@ for (const b of [1200, 4321, 9999, 20000]) {
   const r = suggest(b, 200, "concert");
   assert.ok(estimate(r.config!) <= b, `over budget at ${b}`);
 }
+
+// request email
+const mail = buildRequestMail(
+  "empresa@exemplo.pt",
+  { name: " Ana & Rui ", date: "2027-06-12", place: "", people: "300", message: "Casamento ao ar livre?" },
+  ["Pack: Pro"],
+  pt.contact,
+);
+assert.ok(mail.href.startsWith("mailto:empresa@exemplo.pt?subject="));
+const params = new URLSearchParams(mail.href.split("?")[1]);
+assert.equal(params.get("subject"), "Pedido de orçamento — Ana & Rui"); // "&" must not break the query
+const body = params.get("body")!;
+assert.ok(body.includes("Local: —") && body.includes("Pack: Pro") && body.includes("Casamento ao ar livre?"));
+assert.ok(mail.href.length < 2000, "mailto too long for some clients");
 console.log("packs: ok");

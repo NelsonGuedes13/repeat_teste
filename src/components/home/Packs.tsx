@@ -6,10 +6,8 @@ import type { Dictionary } from "@/i18n/pt";
 import type { Locale } from "@/i18n/config";
 import { useSectionProgress } from "@/components/useSectionProgress";
 import { useDriveRig } from "@/components/useDriveRig";
+import { sendToContact } from "@/lib/quote";
 import { PACKS, EXTRAS, MAX_DAYS, emptyExtras, estimate, rigFor, type Config, type PackId, type ExtraId } from "@/lib/packs";
-
-/** Read by the contact form (phase 6) to pre-fill the request. */
-export const QUOTE_KEY = "repeat:quote";
 
 const ACCENT: Record<PackId, string> = { essencial: "#2ee6ff", pro: "#ff2e88", espetaculo: "#ffb02e" };
 
@@ -48,14 +46,7 @@ export default function Packs({ t, lang }: { t: Dictionary["packs"]; lang: Local
   const setExtra = (id: ExtraId, v: number) =>
     setConfig((c) => ({ ...c, extras: { ...c.extras, [id]: v } }));
 
-  const request = () => {
-    try {
-      sessionStorage.setItem(QUOTE_KEY, JSON.stringify({ mode: "pack", ...config, estimate: total }));
-    } catch {
-      // storage blocked (private mode): the form just starts empty
-    }
-    document.getElementById("pedido")?.scrollIntoView({ behavior: "smooth" });
-  };
+  const request = () => sendToContact({ mode: "pack", ...config, estimate: total });
 
   return (
     <section ref={ref} id="packs" className="relative px-4 py-24 sm:px-10 sm:py-32">

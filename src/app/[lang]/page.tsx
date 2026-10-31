@@ -9,6 +9,7 @@ import WarehouseStory from "@/components/home/WarehouseStory";
 import TripStory from "@/components/home/TripStory";
 import Packs from "@/components/home/Packs";
 import Budget from "@/components/home/Budget";
+import Contact from "@/components/home/Contact";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -36,10 +37,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <Packs t={dict.packs} lang={lang} />
       <Budget t={dict.budget} packs={dict.packs} lang={lang} />
 
-      {/* placeholder until the request form (phase 6) lands */}
-      <section id="pedido" className="flex min-h-svh items-center justify-center px-4">
-        <p className="text-xs uppercase tracking-[0.35em] text-mute">{dict.next}</p>
-      </section>
+      <Contact t={dict} lang={lang} />
     </main>
   );
 }
